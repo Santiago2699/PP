@@ -8,7 +8,7 @@ let f2 n = (function true -> "es par"| false -> "es impar")(n mod 2 = 0)
 
 (*let f3 n = if n mod 2 = 0 then "multiplo de 2"
             else if n mod 3 = 0 then "multiplo de 3"
-            else "impar";;*)
+            else "impar"*)
 let f3 n = (function true -> "multiplo de dos" | false ->
            (function true ->"multiplo de tres" | false -> "impar")
            (n mod 3 = 0))(n mod 2 = 0)
