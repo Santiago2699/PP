@@ -1,5 +1,5 @@
 let rec sum_cifras n =
-  if n / 10 = 0 then n mod 10
+  if n / 10 = 0 then n 
   else sum_cifras(n/10) + n mod 10;;  
 
 let rec num_cifras n = 
