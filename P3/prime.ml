@@ -22,8 +22,8 @@ let is_prime n =
 
 let is_prime2 n =
   let root = int_of_float(sqrt(float_of_int n)) in
-  if n mod 2 = 0 then true
+  if n != 2 && n mod 2 = 0 then false
   else let rec check_from i =
          i > root ||
-         (n mod i <> 0 && check_from (i+2))
-         in check_from 3
+         (n mod i <> 0 && check_from (i+1))
+         in check_from 2;;

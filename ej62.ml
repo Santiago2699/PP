@@ -1,0 +1,1 @@
+let curry (a,b) = function (function (a,b) -> a) -> (function a -> (function b ->a));;
