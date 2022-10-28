@@ -5,4 +5,4 @@ let rec fact = function
 if Array.length Sys.argv = 2
   then print_endline (string_of_int (fact (int_of_string(Sys.argv.(1)))))
 else
-  print_endline ("fact: numero de argumentos invalido")
+  print_endline ("fact: número de argumentos inválido")
