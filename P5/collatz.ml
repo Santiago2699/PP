@@ -1,12 +1,12 @@
-let collatz n = if n mod 2 = 0 then n / 2 else 3 * n + 1
+let collatz n = if n mod 2 = 0 then n / 2 else 3 * n + 1;;
 
 let rec orbit n = 
   if n = 1 then "1"
-  else (string_of_int n)  ^ ", " ^ orbit(collatz n)
+  else (string_of_int n)  ^ ", " ^ orbit(collatz n);;
 
 let rec length n =
   if n = 1 then 0
-  else lenght(collatz n) + 1
+  else length(collatz n) + 1;;
   
 let rec top n =
   if n = 1 then 1
@@ -32,3 +32,6 @@ let rec highest_in m n =
   and top2 = top m in
   if top1 > top2 then (num, top1)
   else (m, top2);;  
+
+
+
