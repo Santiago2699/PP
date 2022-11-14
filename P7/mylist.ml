@@ -67,9 +67,36 @@ let rec combine l1 l2 = match l1,l2 with
 
 let init i f = 
   if i < 0 then raise(Invalid_argument "init")
-  else let rec aux f = function 
-        
-  
+  else let rec aux f = function
+      0 -> []
+     |n -> f 0::aux (function n -> f (n+1)) (n-1) in
+  aux f i ;;   
+
+let rec rev = function
+  [] -> []
+ |h::t -> (rev t)@[h];;    
+
+ let rec rev_append l1 l2 =match l1 with
+  [] -> l2
+ |h::t -> rev_append t (h::l2);;   
+
+ let rec concat = function 
+  [] -> []
+ |[]::t -> concat t
+ |(h1::t1)::t -> h1:: concat (t1::t);; 
+
+ let rec flatten = function 
+ [] -> []
+|[]::t -> flatten t
+|(h1::t1)::t -> h1:: flatten (t1::t);; 
+
+let rec map f = function
+  [] -> []
+ |h::t -> (f h)::map f t;; 
+
+let rec rev_map f = function
+  [] -> []
+ |h::t -> (rev_map f t)@[f h];;
   
 
 
