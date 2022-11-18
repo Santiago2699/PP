@@ -17,7 +17,7 @@ let rec nth l n = match (l,n) with
     |(h::_, 0) -> h
     |(_::t, n) -> nth t (n-1)           
 
-let nth l n = if n >= 0 then nth l n
+let nth l n = if n > 0 then nth l n
     else raise (Invalid_argument "nth")
 
  let rec append l1 l2 = match l1 with

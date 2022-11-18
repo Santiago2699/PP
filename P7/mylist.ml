@@ -42,10 +42,7 @@ let rec filter f = function
  |h::t -> if f h then h::filter f t 
           else filter f t;;
 
-let rec find_all f = function
-[] -> [];
-|h::t -> if f h then h::find_all f t 
-         else find_all f t;;
+let find_all f l= filter f l;;
 
 let rec partition f = function
   [] -> ([],[])
@@ -72,23 +69,25 @@ let init i f =
      |n -> f 0::aux (function n -> f (n+1)) (n-1) in
   aux f i ;;   
 
-let rec rev = function
-  [] -> []
- |h::t -> (rev t)@[h];;    
+let rev l = 
+  let rec aux l1 = function
+    [] -> l1
+    |h::t -> aux (h::l1) t in
+  aux [] l;;   
 
- let rec rev_append l1 l2 =match l1 with
+let rec rev_append l1 l2 =match l1 with
   [] -> l2
  |h::t -> rev_append t (h::l2);;   
 
- let rec concat = function 
+let rec concat = function 
   [] -> []
  |[]::t -> concat t
  |(h1::t1)::t -> h1:: concat (t1::t);; 
 
- let rec flatten = function 
- [] -> []
-|[]::t -> flatten t
-|(h1::t1)::t -> h1:: flatten (t1::t);; 
+let rec flatten = function 
+  [] -> []
+  |[]::t -> flatten t
+  |(h1::t1)::t -> h1:: flatten (t1::t);; 
 
 let rec map f = function
   [] -> []
@@ -98,9 +97,23 @@ let rec rev_map f = function
   [] -> []
  |h::t -> (rev_map f t)@[f h];;
   
+let rec map2 f l1 l2 = match l1, l2 with
+  [],[] -> []
+ |[],_ -> raise(Invalid_argument "map2")
+ |_,[] -> raise(Invalid_argument "map2")
+ |h1::t1, h2::t2 -> (f h1 h2)::map2 f t1 t2;; 
 
 
+ let rec fold_left f a = function
+ [] -> a
+|h::t -> fold_left f (f a h) t;;
 
+let rec fold_right f l a = match l with
+  [] -> a
+ |h::[]-> f h a
+ |h::t -> f h (fold_right f t a);;
+
+  
  
 
  
