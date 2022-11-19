@@ -36,9 +36,11 @@ f 1, f 2, f 3;;
 (*- : int * int * int = (4, 9, 16)*)
 
 let i = function a -> a;;
-
+(**)
 let j = function (a,b) -> a;;
 
 let k = function (a,b) -> b;;
 
 let l = function a -> a::[];;
+
+(**)

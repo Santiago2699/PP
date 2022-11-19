@@ -56,4 +56,3 @@ let prinet_all_queens n =
     else completa promesa (i, j+1)  
   in completa [] (1,1);;     
 
-print_all_queens  
