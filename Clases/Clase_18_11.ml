@@ -51,4 +51,44 @@ let rec height = function
 let preorder = function
   E -> []
  |N (x, lb, rb) -> (x::preorder lb) @ (preorder rb);;
-  
+
+ let rec leaves = function 
+  E -> []
+ |N(v,E,E) -> [v]
+ |N(_,l,r) -> leaves l @ leaves r;; 
+
+type 'a gtree = 
+  GT of 'a * 'a gtree list;;
+
+let h v = GT (v,[]);;
+
+let t9 = GT (9, [h 4]);;
+let t6 = GT (6, [h 5; h 11]);;
+let t7 = GT (7, [h 2; h 10; t6]);;
+let t5 = GT (5, [t9]);;
+let t = GT(2, [t4;t5]);;
+
+let rec nngt (GT(_,l)) = 
+  List.foldleft (+) 1 (List.map nngt l);;
+
+let rec nngt = function
+  GT (_, []) -> 1
+ |GT(v, h::t) -> nngt h + (GT(v, t));;
+ 
+type 'a st_tree = 
+  Leaf of 'a
+ |Node of 'a * a' st_tree * a' st_tree;;
+ 
+let rec mirror = function
+  Leaf v -> Leaf v
+ |Node (v,l,r) -> Node(v,mirror r, mirror l);; 
+
+ let rec b_of_st = function
+  Leaf v -> N(v, E, E)
+ |Node (v, l, r) -> N(v, b_of_st l, b_of_st r);;
+
+let rec st_of_b = function
+  E -> raise(failure "st_of_b")
+ |N(v,E,E) -> Leaf v
+ |N(v,l,r) -> Node(v, st_of_b l, st_of_b r)
+ 
