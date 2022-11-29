@@ -6,13 +6,19 @@ let tl = function
     _::t -> t
   |[] -> raise(Failure "tl");;
 
-let rec compare_legths l1 l2 = match l1,l2 with
+let length l = 
+  let rec aux i = function
+    [] -> i
+    |_::t -> aux (i+1) t
+  in aux 0 l;;   
+
+let rec compare_lengths l1 l2 = match l1,l2 with
   [],[] -> 0
- |[], _ -> 1
- | _,[] -> -1
- |_::t1, _::t2 -> compare_legths t1 t2;;
+ |[], _ -> -1
+ | _,[] -> 1
+ |_::t1, _::t2 -> compare_lengths t1 t2;;
 
-
+ 
 let nth l i = 
   if i < 0 then raise(Invalid_argument "nth")
   else let rec nthAux l i = match l,i with
@@ -84,8 +90,14 @@ let init len f =
  
 let rec rev_append l1 l2 =match l1 with
   [] -> l2
- |h::t -> rev_append t (h::l2);;  
+ |h::t -> rev_append t (h::l2);;
 
+ let rev_map f l =
+  let rec aux f l1 l2 = match l1 with
+    | [] -> l2
+    | h::t -> aux f t ((f h)::l2)
+  in aux f l [];;
+  
 let rec concat = function 
   [] -> []
  |[]::t -> concat t

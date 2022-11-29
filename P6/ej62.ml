@@ -1,3 +1,7 @@
+(* Santiago Alfredo Castro Rampersad (54940335-M)
+   GRUPO 4.3 
+*)
+
 let curry f = function x -> (function y -> f(x,y));;
 
 let uncurry f = function (x,y) -> f x y;;
@@ -36,11 +40,13 @@ f 1, f 2, f 3;;
 (*- : int * int * int = (4, 9, 16)*)
 
 let i = function a -> a;;
-(**)
+
 let j = function (a,b) -> a;;
 
 let k = function (a,b) -> b;;
 
 let l = function a -> a::[];;
 
-(**)
+(*De las primeras tres (i, k, j) solo se puede escribir una
+   funcion de cada una y de la ultima (l) hay infinitas
+   ya que por ejemplo puedes hacer a0::...an::[] "infinitas" veces*)

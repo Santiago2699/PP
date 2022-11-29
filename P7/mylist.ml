@@ -6,11 +6,17 @@ let hd = function
     _::t -> t
   |[] -> raise(Failure "tl");;
 
- let rec compare_legths l1 l2 = match l1,l2 with
+  let length l = 
+    let rec aux i = function
+      [] -> i
+      |_::t -> aux (i+1) t
+    in aux 0 l;; 
+
+ let rec compare_lengths l1 l2 = match l1,l2 with
     [],[] -> 0
-   |[], _ -> 1
-   | _,[] -> -1
-   |_::t1, _::t2 -> compare_legths t1 t2;;
+   |[], _ -> -1
+   | _,[] -> 1
+   |_::t1, _::t2 -> compare_lengths t1 t2;;
 
 let rec nth l i = match l,i with
     [], _ -> raise(Failure "nth")
@@ -93,10 +99,12 @@ let rec map f = function
   [] -> []
  |h::t -> (f h)::map f t;; 
 
-let rec rev_map f = function
-  [] -> []
- |h::t -> (rev_map f t)@[f h];;
-  
+let rev_map f l =
+  let rec aux f l1 l2 = match l1 with
+    | [] -> l2
+    | h::t -> aux f t ((f h)::l2)
+  in aux f l [];; 
+
 let rec map2 f l1 l2 = match l1, l2 with
   [],[] -> []
  |[],_ -> raise(Invalid_argument "map2")
