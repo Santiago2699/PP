@@ -21,7 +21,7 @@ let size t = fold_tree (fun x y z -> 1 + y + z ) 0 t;;
 
 let height t = fold_tree(fun x y z -> 1 + (max y z)) 0 t;;
 
-let inorder t = fold_tree(fun x y z -> List.rev_append (x::y) z) [] t;;
+let inorder t = fold_tree(fun x y z -> y@(x::z)) [] t;;
 
 let mirror t = fold_tree(fun x y z -> Node(x,z,y)) Empty t;;
 
