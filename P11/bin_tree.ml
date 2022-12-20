@@ -15,7 +15,7 @@ let rec fold_tree f a = function
 
 let sum t = fold_tree (fun x y z -> x + y + z) 0 t;;
  
-let prod t = fold_tree (fun x y z -> x * y * z) 1 t;;
+let prod t = fold_tree (fun x y z -> x *. y *. z) 1. t;;
 
 let size t = fold_tree (fun x y z -> 1 + y + z ) 0 t;;
 
