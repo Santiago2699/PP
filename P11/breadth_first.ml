@@ -11,9 +11,17 @@ let breadth_first_t gt =
    |Gt (x, (Gt (y, t2))::t1) -> aux (x::l) (Gt (y, (List.rev_append (List.rev t1) t2)))
   in aux [] gt;;  
 
-let rec arbolote = function
+(*let rec arbolote = function
   0 -> Gt(0, [])
  |n -> Gt ((n-1), [arbolote (n - 1)]);;
+*)
+
+let arbolote n = 
+  let rec aux t n = 
+    if n > 0 then
+      aux (Gt (n,[t])) (n-1)
+    else t
+  in aux (Gt (0,[])) n;;
 
 let t2 = arbolote 150000;;
 

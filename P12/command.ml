@@ -16,8 +16,7 @@ let rec run ctx = function
       ctx
 
   | Var_def (str, ari) -> 
-      let var = get_binding ctx str in
-      let f = (eval ctx var) in
-      let _ = print_endline (string_of_float f) in
-      ctx
-  | Quit -> Raise (End_of_program);;    
+      let f = eval ctx ari in
+      let _ = print_endline ( str ^ " = " ^ string_of_float f) in
+      add_binding ctx str f
+  | Quit -> raise (End_of_program);;    

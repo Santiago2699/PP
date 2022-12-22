@@ -12,12 +12,14 @@ open Lexer;;
 let rec loop ctx =
   print_string ">> ";
 
-  ...
-
-  let cmd = s token (from_string (read_line ())) in
-
-  ...
-
+  try 
+    let ctx = run ctx  (s token (from_string (read_line ()))) in loop ctx 
+  with 
+   End_of_program -> ctx
+  | No_binding s-> let _ = print_endline("Variable " ^s^ " not defined") in loop ctx 
+  | Function_not_defined s -> let _ =print_endline("Function " ^ s ^ " not defined") in loop ctx
+  | Parse_error -> let _ =print_endline("Syntax error") in loop ctx
+  | Lexical_error -> let _ = print_endline("Lexical error") in loop ctx
 ;;
 
 let _ = print_endline "Floating point calculator..." in
